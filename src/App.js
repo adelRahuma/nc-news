@@ -17,7 +17,7 @@ function App() {
         <Route path="/Articles" element={<Articles />}></Route>
         <Route path="/Topics" element={<Topics />}></Route>
         <Route path="/Comments" element={<Comments />}></Route>
-        <Route path="/ArticleById" element={<ArticleById />}></Route>
+        <Route path="/ArticleById/:article_id" element={<ArticleById />}></Route>
       </Routes>
     </div>
   );
