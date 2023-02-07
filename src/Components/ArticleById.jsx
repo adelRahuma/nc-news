@@ -20,7 +20,7 @@ export default function ArticleById() {
   return (
     <div className="container">
       <div className="row">
-        <h4>Article_id= {articles[0].article_id}</h4>
+        <h4>{articles[0].title}</h4>
         <br />
       </div>
 
@@ -33,7 +33,9 @@ export default function ArticleById() {
           boxShadow: "7px 2px 10px 2px #7fecad",
         }}
       >
-        <p>{articles[0].title}</p>
+        <p>
+          <br />
+        </p>
         <div
           style={{
             padding: "10px",
@@ -45,6 +47,7 @@ export default function ArticleById() {
         </div>
         <div className="col md-6">
           <img
+            className="rounded-circle"
             src={articles[0].article_img_url}
             style={{ padding: "20px", maxWidth: "300px" }}
             alt={articles[0].title}
