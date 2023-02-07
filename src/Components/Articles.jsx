@@ -1,5 +1,6 @@
 import { useParams } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "react-bootstrap";
 import { getArticles } from "../Utilis/FetchData";
 import { v4 as uuidv4 } from "uuid";
@@ -24,30 +25,28 @@ export default function Articles() {
         <h4>List of Articles</h4>
         <br />
       </div>
-      <div
-        className="row row border border-dark"
-        style={{ backgroundColor: "lightgrey" }}
-      >
-        <div className="col-1">ID</div>
-        <div className="col-2">Title</div>
-        <div className="col-2">Topic</div>
-        <div className="col-2">Author</div>
-        <div className="col-4">Body</div>
-        <div className="col-1">Votes</div>
-      </div>
+      <div className="row">
+       <div className="col-1">ID</div>
+          <div className="col-4">Title</div>
+          <div className="col-2">Topic</div>
+          <div className="col-2">Author</div>
+          <div className="col-2">Image</div>
+          <div className="col-1">Votes</div>
+          </div>
       {articles.map((list) => (
+        <div >
         <div
-          className="row row border border-dark"
-          style={{ padding: "6px" }}
-          key={uuidv4()}
+          className="row"
+          style={{padding: "10px" ,backgroundColor:"#d6e8d6", boxShadow: "7px 2px 10px 2px #7fecad"}}
+          
         >
           <div className="col-1">{list.article_id}</div>
-          <div className="col-2">{list.title}</div>
+          <div className="col-4">{list.title}</div>
           <div className="col-2">{list.topic}</div>
           <div className="col-2">{list.author}</div>
-          <div className="col-4">{list.body}</div>
+          <div className="col-2"><img src={list.article_img_url} style={{maxWidth:"100px"}}/></div>
           <div className="col-1">{list.votes}</div>
-        </div>
+        </div></div>
       ))}
     </div>
   );

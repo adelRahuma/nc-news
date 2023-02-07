@@ -6,6 +6,7 @@ import MyNavbar from "./Components/MyNavbar";
 import Articles from "./Components/Articles";
 import Topics from "./Components/Topics";
 import Comments from "./Components/Comments";
+import ArticleById from "./Components/ArticleById";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/Articles" element={<Articles />}></Route>
         <Route path="/Topics" element={<Topics />}></Route>
         <Route path="/Comments" element={<Comments />}></Route>
+        <Route path="/ArticleById" element={<ArticleById />}></Route>
       </Routes>
     </div>
   );
