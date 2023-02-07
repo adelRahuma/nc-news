@@ -33,15 +33,21 @@ export default function ArticleById() {
           boxShadow: "7px 2px 10px 2px #7fecad",
         }}
       >
-        <p>Article_id :{articles[0].article_id}</p>
-        <p>Article_Title :{articles[0].title}</p>
-        <p>Article_Topic :{articles[0].topic}</p>
-        <p>Article_Author :{articles[0].author}</p>
-        <p className="">Article_Votes :{articles[0].votes}</p>
-        <div>
+        <p>{articles[0].title}</p>
+        <div
+          style={{
+            padding: "10px",
+            backgroundColor: "grey",
+            boxShadow: "7px 2px 10px 2px #1c87c9",
+          }}
+        >
+          <p>{articles[0].body}</p>
+        </div>
+        <div className="col md-6">
           <img
             src={articles[0].article_img_url}
-            style={{ maxWidth: "400px" }}
+            style={{ padding: "20px", maxWidth: "300px" }}
+            alt={articles[0].title}
           />
         </div>
       </div>
