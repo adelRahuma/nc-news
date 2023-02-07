@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+.navbar {
+  width: 100%;
+  background-color: #5dce5d;
+  overflow: auto;
+}
+.Link {
+  float: left;
+  padding: 6px;
+  color: rgb(252, 251, 251);
+  text-decoration: none;
+  font-size: 17px;
+  width: 100%; /* Four equal-width links. If you have two links, use 50%, and 33.33% for three links, etc.. */
+  text-align: center; /* If you want the text to be centered */
+}
+.Link:hover {
+  background-color: #8bb5ec;
+}
+
+/* Style the current/active link */
+Link.active {
+  background-color: #0fe596;
+}
