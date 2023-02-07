@@ -11,7 +11,6 @@ import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <button type="button" className="btn btn-danger">tttttt</button>
       <MyNavbar />
       <Routes>
         <Route path="/Articles" element={<Articles />}></Route>
