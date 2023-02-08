@@ -25,7 +25,7 @@ export default function Articles() {
         <h4>List of Articles</h4>
         <br />
       </div>
-     
+
       {articles.map((list) => (
         <div key={uuidv4()}>
           <div
@@ -36,14 +36,14 @@ export default function Articles() {
               boxShadow: "7px 2px 10px 2px #7fecad",
             }}
           >
-          <Link to={"/ArticleById/"+`${list.article_id}`}> <div className="col-1">{list.article_id}</div></Link>
-            <div className="col-4">{list.title}</div>
+            <Link className="col-6" to={"/ArticleById/" + `${list.article_id}`}>
+              {list.title}
+            </Link>
             <div className="col-2">{list.topic}</div>
             <div className="col-2">{list.author}</div>
             <div className="col-2">
               <img src={list.article_img_url} style={{ maxWidth: "100px" }} />
             </div>
-            <div className="col-1">{list.votes}</div>
           </div>
         </div>
       ))}

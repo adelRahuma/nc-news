@@ -17,19 +17,28 @@ export default function ArticleById() {
   const { article_id } = useParams();
   // const navigate = useNavigate();
   useEffect(() => {
-    getArticleById(article_id).then((data) => {
-      setArticles(data);
-     setLoading(true);
-      // getArticlesWithComments(article_id).then((data) => {
-      //   articlesCom(data);
-        //setLoading2(true);
-     // });
-      
+    Promise.all([
+      getArticleById(article_id),
+      getArticlesWithComments(article_id),
+    ]).then(([getArticleById, getArticlesWithComments]) => {
+      setArticles(getArticleById);
+      setArticlesCom(getArticlesWithComments);
+      setLoading(true);
     });
-  }, []);
+
+    // getArticleById(article_id).then((data) => {
+    //  });
+    // getArticlesWithComments(article_id).then((data) => {
+    //  ;
+    //   console.log(articlesCom)
+    //     //setLoading2(true);
+    //  });
+  }, [article_id]);
+
   if (!loading) {
     return <h3>Loading...</h3>;
   }
+
   return (
     <>
       <div className="container p-5 my-2 bg-dark text-black">
@@ -80,14 +89,34 @@ export default function ArticleById() {
         className="btn btn-primary"
         onClick={() => {
           // navigate("/ArticleWithComments", { state: { article_id } });
-          console.log("Still Here", "<<articleById");
           setCommentVisble((currState) => !currState);
-
           // return <ArticleWithComments article_id={article_id} />;
         }}
       >
         Show Comments
       </button>
+      {commentvisble === true ? (
+        <>
+          <h6>Click to Hide</h6>
+          {articlesCom.map((comment) => (
+            <div key={comment.comment_id}>
+              <ul
+                style={{
+                  padding:"10px",
+                  backgroundColor: "#E5E4E2",
+                  textAlign: "left",
+                  boxShadow: "7px 2px 10px 2px #6F6F6F",
+                }}
+              >
+                <li>{comment.body}</li>
+                <li style={{ fontWeight: "bold", textAlign: "center" }}>
+                  {comment.author}
+                </li>
+              </ul>
+            </div>
+          ))}
+        </>
+      ) : null}
     </>
   );
 }
