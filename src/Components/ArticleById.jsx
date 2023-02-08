@@ -19,12 +19,12 @@ export default function ArticleById() {
   useEffect(() => {
     getArticleById(article_id).then((data) => {
       setArticles(data);
-
-      getArticlesWithComments(article_id).then((data) => {
-        articlesCom(data);
+     setLoading(true);
+      // getArticlesWithComments(article_id).then((data) => {
+      //   articlesCom(data);
         //setLoading2(true);
-      });
-      setLoading(true);
+     // });
+      
     });
   }, []);
   if (!loading) {
