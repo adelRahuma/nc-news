@@ -43,7 +43,7 @@ p {
 }
 .navbar {
   width: 100%;
-  background-color: #d6e8d6;
+  background-color: hsl(183, 70%, 73%);
   overflow: auto;
 }
 .Link {
