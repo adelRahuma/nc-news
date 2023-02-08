@@ -25,14 +25,7 @@ export default function Articles() {
         <h4>List of Articles</h4>
         <br />
       </div>
-      <div className="row">
-        <div className="col-1">ID</div>
-        <div className="col-4">Title</div>
-        <div className="col-2">Topic</div>
-        <div className="col-2">Author</div>
-        <div className="col-2">Image</div>
-        <div className="col-1">Votes</div>
-      </div>
+     
       {articles.map((list) => (
         <div key={uuidv4()}>
           <div
