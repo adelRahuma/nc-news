@@ -77,28 +77,32 @@ export default function ArticleById() {
               alt={articles[0].title}
             />
           </div>
-          
         </div>
-        <div style={{backgroundColor:"#686A6C", fontWeight: "bold", textAlign: "center" }}>
-                  <button
-                    type="button"
-                    className="btn btn-success px-2 me-2"
-                    disabled={votesNo === 1}
-                    onClick={() => handleChange(1)}
-                  >
-                    <i className="fas fa-plus"></i>+
-                  </button>
-                {"Votes "+ articles[0].votes}
-                  <button
-                    type="button"
-                    className="btn btn-danger px-2 ms-2"
-                    disabled={votesNo === -1}
-                    onClick={() => handleChange(-1)}
-                  >
-                    <i className="fas fa-minus"></i>-
-                  </button>
-                  </div>
-                
+        <div
+          style={{
+            backgroundColor: "#686A6C",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+        >
+          <button
+            type="button"
+            className="btn btn-success px-2 me-2"
+            disabled={votesNo === 1}
+            onClick={() => handleChange(1)}
+          >
+            <i className="fas fa-plus"></i>+
+          </button>
+          {"Votes " + articles[0].votes}
+          <button
+            type="button"
+            className="btn btn-danger px-2 ms-2"
+            disabled={votesNo === -1}
+            onClick={() => handleChange(-1)}
+          >
+            <i className="fas fa-minus"></i>-
+          </button>
+        </div>
       </div>
       <button
         className="btn btn-primary"
@@ -125,7 +129,6 @@ export default function ArticleById() {
                 <li style={{ fontWeight: "bold", textAlign: "center" }}>
                   {comment.author}
                 </li>
-               
               </ul>
             </div>
           ))}
