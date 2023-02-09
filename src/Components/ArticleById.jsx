@@ -6,11 +6,14 @@ import {
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { upateCommentVotes } from "../Utilis/PatchVote";
+
 export default function ArticleById() {
   const [commentvisble, setCommentVisble] = useState(false);
   const [articles, setArticles] = useState([]);
   const [articlesCom, setArticlesCom] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [votesNo, setVotesNo] = useState(0);
   const { article_id } = useParams();
   useEffect(() => {
     Promise.all([
@@ -21,11 +24,15 @@ export default function ArticleById() {
       setArticlesCom(getArticlesWithComments);
       setLoading(true);
     });
-  }, [article_id]);
+  }, [article_id, articlesCom, votesNo]);
 
   if (!loading) {
     return <h3>Loading...</h3>;
   }
+  const handleChange = (value) => {
+    setVotesNo((currChange) => currChange + value);
+    upateCommentVotes(article_id, value);
+  };
 
   return (
     <>
@@ -70,7 +77,28 @@ export default function ArticleById() {
               alt={articles[0].title}
             />
           </div>
+          
         </div>
+        <div style={{backgroundColor:"#686A6C", fontWeight: "bold", textAlign: "center" }}>
+                  <button
+                    type="button"
+                    className="btn btn-success px-2 me-2"
+                    disabled={votesNo === 1}
+                    onClick={() => handleChange(1)}
+                  >
+                    <i className="fas fa-plus"></i>+
+                  </button>
+                {"Votes "+ articles[0].votes}
+                  <button
+                    type="button"
+                    className="btn btn-danger px-2 ms-2"
+                    disabled={votesNo === -1}
+                    onClick={() => handleChange(-1)}
+                  >
+                    <i className="fas fa-minus"></i>-
+                  </button>
+                  </div>
+                
       </div>
       <button
         className="btn btn-primary"
@@ -97,6 +125,7 @@ export default function ArticleById() {
                 <li style={{ fontWeight: "bold", textAlign: "center" }}>
                   {comment.author}
                 </li>
+               
               </ul>
             </div>
           ))}
