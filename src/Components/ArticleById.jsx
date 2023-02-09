@@ -17,19 +17,20 @@ export default function ArticleById() {
   const { article_id } = useParams();
   // const navigate = useNavigate();
   useEffect(() => {
-    getArticleById(article_id).then((data) => {
-      setArticles(data);
-     setLoading(true);
-      // getArticlesWithComments(article_id).then((data) => {
-      //   articlesCom(data);
-        //setLoading2(true);
-     // });
-      
+    Promise.all([
+      getArticleById(article_id),
+      getArticlesWithComments(article_id),
+    ]).then(([getArticleById, getArticlesWithComments]) => {
+      setArticles(getArticleById);
+      setArticlesCom(getArticlesWithComments);
+      setLoading(true);
     });
-  }, []);
+  }, [article_id]);
+
   if (!loading) {
     return <h3>Loading...</h3>;
   }
+
   return (
     <>
       <div className="container p-5 my-2 bg-dark text-black">
@@ -53,7 +54,6 @@ export default function ArticleById() {
               height: "50%",
               padding: "10px",
               textAlign: "justify",
-              // backgroundColor: "#C0C0C0",
               backgroundColor: "hsl(183, 70%, 73%)",
               boxShadow: "7px 2px 10px 2px #6F6F6F",
             }}
@@ -79,20 +79,37 @@ export default function ArticleById() {
       <button
         className="btn btn-primary"
         onClick={() => {
-          // navigate("/ArticleWithComments", { state: { article_id } });
-          console.log("Still Here", "<<articleById");
           setCommentVisble((currState) => !currState);
-
-          // return <ArticleWithComments article_id={article_id} />;
         }}
       >
         Show Comments
       </button>
+      {commentvisble === true ? (
+        <>
+          <h6>Click to Hide</h6>
+          {articlesCom.map((comment) => (
+            <div key={comment.comment_id}>
+              <ul
+                style={{
+                  padding: "10px",
+                  backgroundColor: "#E5E4E2",
+                  textAlign: "left",
+                  boxShadow: "7px 2px 10px 2px #6F6F6F",
+                }}
+              >
+                <li>{comment.body}</li>
+                <li style={{ fontWeight: "bold", textAlign: "center" }}>
+                  {comment.author}
+                </li>
+              </ul>
+            </div>
+          ))}
+        </>
+      ) : null}
     </>
   );
 }
 
-// export function ArticleWithComments({ article_id }) {
 //   //const location = useLocation();
 //   const [articlesCom, setArticlesCom] = useState([]);
 //   const [loading2, setLoading2] = useState(false);
