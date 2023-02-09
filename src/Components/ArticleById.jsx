@@ -5,6 +5,7 @@ import {
 } from "../Utilis/getArticleById";
 import { useParams } from "react-router";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from 'react-router-dom';
 
 export default function ArticleById() {
   const [commentvisble, setCommentVisble] = useState(false);
@@ -12,6 +13,7 @@ export default function ArticleById() {
   const [articlesCom, setArticlesCom] = useState([]);
   const [loading, setLoading] = useState(false);
   const { article_id } = useParams();
+  const navigate = useNavigate();
   useEffect(() => {
     Promise.all([
       getArticleById(article_id),
@@ -55,6 +57,7 @@ export default function ArticleById() {
             }}
           >
             <p>{articles[0].body}</p>
+            <button className="btn btn-outline-primary" onClick={(e)=>{navigate('/Comments')} }>Comment</button>
           </div>
 
           <div className="col-6">
