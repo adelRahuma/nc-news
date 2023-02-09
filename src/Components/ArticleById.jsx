@@ -10,7 +10,6 @@ import { upateCommentVotes } from "../Utilis/PatchVote";
 import SingleArticle from "./SingleArticle";
 
 export default function ArticleById() {
-  const [commentvisble, setCommentVisble] = useState(false);
   const [articles, setArticles] = useState([]);
   const [articlesCom, setArticlesCom] = useState([]);
   const [loading, setLoading] = useState(false);
