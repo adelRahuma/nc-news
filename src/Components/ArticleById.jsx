@@ -4,8 +4,8 @@ import {
   getArticlesWithComments,
 } from "../Utilis/getArticleById";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+
 export default function ArticleById() {
   const [commentvisble, setCommentVisble] = useState(false);
   const [articles, setArticles] = useState([]);
