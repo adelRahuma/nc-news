@@ -25,14 +25,6 @@ export default function ArticleById() {
       setArticlesCom(getArticlesWithComments);
       setLoading(true);
     });
-
-    // getArticleById(article_id).then((data) => {
-    //  });
-    // getArticlesWithComments(article_id).then((data) => {
-    //  ;
-    //   console.log(articlesCom)
-    //     //setLoading2(true);
-    //  });
   }, [article_id]);
 
   if (!loading) {
@@ -62,7 +54,6 @@ export default function ArticleById() {
               height: "50%",
               padding: "10px",
               textAlign: "justify",
-              // backgroundColor: "#C0C0C0",
               backgroundColor: "hsl(183, 70%, 73%)",
               boxShadow: "7px 2px 10px 2px #6F6F6F",
             }}
@@ -88,9 +79,7 @@ export default function ArticleById() {
       <button
         className="btn btn-primary"
         onClick={() => {
-          // navigate("/ArticleWithComments", { state: { article_id } });
           setCommentVisble((currState) => !currState);
-          // return <ArticleWithComments article_id={article_id} />;
         }}
       >
         Show Comments
@@ -102,7 +91,7 @@ export default function ArticleById() {
             <div key={comment.comment_id}>
               <ul
                 style={{
-                  padding:"10px",
+                  padding: "10px",
                   backgroundColor: "#E5E4E2",
                   textAlign: "left",
                   boxShadow: "7px 2px 10px 2px #6F6F6F",
@@ -121,7 +110,6 @@ export default function ArticleById() {
   );
 }
 
-// export function ArticleWithComments({ article_id }) {
 //   //const location = useLocation();
 //   const [articlesCom, setArticlesCom] = useState([]);
 //   const [loading2, setLoading2] = useState(false);
