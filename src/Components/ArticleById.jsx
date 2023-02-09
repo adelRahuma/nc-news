@@ -6,16 +6,12 @@ import {
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-//import { useNavigate } from "react-router-dom";
-
 export default function ArticleById() {
   const [commentvisble, setCommentVisble] = useState(false);
   const [articles, setArticles] = useState([]);
   const [articlesCom, setArticlesCom] = useState([]);
-
   const [loading, setLoading] = useState(false);
   const { article_id } = useParams();
-  // const navigate = useNavigate();
   useEffect(() => {
     Promise.all([
       getArticleById(article_id),
@@ -109,22 +105,3 @@ export default function ArticleById() {
     </>
   );
 }
-
-//   //const location = useLocation();
-//   const [articlesCom, setArticlesCom] = useState([]);
-//   const [loading2, setLoading2] = useState(false);
-//   //const { article_id } = props; //location.state;
-
-//   useEffect(() => {
-//     getArticlesWithComments(article_id).then((data) => {
-//       articlesCom(data);
-//       setLoading2(true);
-//     });
-//   }, []);
-//   console.log("Hi am There");
-//   console.log(articlesCom);
-//   if (!loading2) {
-//     return <h3>Loading...</h3>;
-//   }
-//   return <div>ArticleWithComments</div>;
-// } //
