@@ -57,7 +57,7 @@ export default function ArticleById() {
             }}
           >
             <p>{articles[0].body}</p>
-            <button className="btn btn-outline-primary" onClick={(e)=>{navigate('/Comments')} }>Comment</button>
+            <button className="btn btn-outline-primary" onClick={(e)=>{navigate('/Comments',{state:{articles}})} }>Comment</button>
           </div>
 
           <div className="col-6">
