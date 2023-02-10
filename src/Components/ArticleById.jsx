@@ -22,6 +22,7 @@ export default function ArticleById() {
       setArticles(getArticleById);
       setArticlesCom(getArticlesWithComments);
       setLoading(true);
+      localStorage.setItem('articlesCom',JSON.stringify(articlesCom))
     });
   }, [article_id]);
 
