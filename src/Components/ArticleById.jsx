@@ -6,10 +6,14 @@ import {
 import { useParams } from "react-router";
 import { v4 as uuidv4 } from "uuid";
 
+import { useNavigate } from "react-router-dom";
+
+
 import { upateCommentVotes } from "../Utilis/PatchVote";
 import SingleArticle from "./SingleArticle";
 
 import { useNavigate } from 'react-router-dom';
+
 
 
 export default function ArticleById() {
@@ -27,7 +31,6 @@ export default function ArticleById() {
       setArticles(getArticleById);
       setArticlesCom(getArticlesWithComments);
       setLoading(true);
-      localStorage.setItem('articlesCom',JSON.stringify(articlesCom))
     });
   }, [article_id, articlesCom, votesNo]);
 
@@ -43,7 +46,9 @@ export default function ArticleById() {
     <>
       <div className="container p-5 my-2 bg-dark text-black">
         <div className="row">
-          <h4 style={{ color: "white" }}>{articles[0].title}</h4>
+          <h4 aria-label="Header" style={{ color: "white" }}>
+            {articles[0].title}
+          </h4>
           <br />
         </div>
 
@@ -66,12 +71,21 @@ export default function ArticleById() {
               boxShadow: "7px 2px 10px 2px #6F6F6F",
             }}
           >
-            <p>{articles[0].body}</p>
-            <button className="btn btn-outline-primary" onClick={(e)=>{navigate('/Comments',{state:{articles}})} }>Comment</button>
+            <p aria-label="Paragraph body">{articles[0].body}</p>
+            <button
+              aria-label="Press Button to comment"
+              className="btn btn-outline-primary"
+              onClick={(e) => {
+                navigate("/Comments", { state: { articles } });
+              }}
+            >
+              Comment
+            </button>
           </div>
 
           <div className="col-6">
             <img
+              aria-label="image explaines the paragraph"
               className="rounded-circle"
               src={articles[0].article_img_url}
               style={{
@@ -110,7 +124,42 @@ export default function ArticleById() {
           </button>
         </div>
       </div>
+
+      <button
+        aria-label="Button show comments"
+        className="btn btn-primary"
+        onClick={() => {
+          setCommentVisble((currState) => !currState);
+        }}
+      >
+        Show Comments
+      </button>
+      {commentvisble === true ? (
+        <>
+          <h6>Click to Hide</h6>
+          {articlesCom.map((comment) => (
+            <div key={comment.comment_id}>
+              <ul
+                aria-label="List of the comments"
+                style={{
+                  padding: "10px",
+                  backgroundColor: "#E5E4E2",
+                  textAlign: "left",
+                  boxShadow: "7px 2px 10px 2px #6F6F6F",
+                }}
+              >
+                <li>{comment.body}</li>
+                <li style={{ fontWeight: "bold", textAlign: "center" }}>
+                  {comment.author}
+                </li>
+              </ul>
+            </div>
+          ))}
+        </>
+      ) : null}
+
       <SingleArticle articlesCom={articlesCom} />
+
     </>
   );
 }

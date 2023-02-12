@@ -47,7 +47,7 @@ p {
   overflow: auto;
 }
 .Link {
-  margin:25px 25px 25px 25px;
+  margin:25px 25px 5px 5px;
   float: left;
   padding: 6px;
   color: rgb(252, 251, 251);
@@ -63,4 +63,16 @@ p {
 /* Style the current/active link */
 Link.active {
   background-color: #0fe596;
+}
+#img{
+  height: 60px;
+  width: 60px;
+  position:fixed;
+  object-fit: fill;
+  right: 20px;
+  padding: 20px;
+  box-shadow: 7px 2px 10px 2px #fcf9f9;
+}
+li:hover{
+  background-color:rgb(213, 218, 218);
 }
