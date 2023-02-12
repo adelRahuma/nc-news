@@ -5,13 +5,18 @@ import {
 } from "../Utilis/getArticleById";
 import { useParams } from "react-router";
 import { v4 as uuidv4 } from "uuid";
+
 import { useNavigate } from 'react-router-dom';
 
+import { upateCommentVotes } from "../Utilis/PatchVote";
+import SingleArticle from "./SingleArticle";
+
+
 export default function ArticleById() {
-  const [commentvisble, setCommentVisble] = useState(false);
   const [articles, setArticles] = useState([]);
   const [articlesCom, setArticlesCom] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [votesNo, setVotesNo] = useState(0);
   const { article_id } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
@@ -24,11 +29,15 @@ export default function ArticleById() {
       setLoading(true);
       localStorage.setItem('articlesCom',JSON.stringify(articlesCom))
     });
-  }, [article_id]);
+  }, [article_id, articlesCom, votesNo]);
 
   if (!loading) {
     return <h3>Loading...</h3>;
   }
+  const handleChange = (value) => {
+    setVotesNo((currChange) => currChange + value);
+    upateCommentVotes(article_id, value);
+  };
 
   return (
     <>
@@ -75,37 +84,33 @@ export default function ArticleById() {
             />
           </div>
         </div>
+        <div
+          style={{
+            backgroundColor: "#686A6C",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+        >
+          <button
+            type="button"
+            className="btn btn-success px-2 me-2"
+            disabled={votesNo === 1}
+            onClick={() => handleChange(1)}
+          >
+            <i className="fas fa-plus"></i>+
+          </button>
+          {"Votes " + articles[0].votes}
+          <button
+            type="button"
+            className="btn btn-danger px-2 ms-2"
+            disabled={votesNo === -1}
+            onClick={() => handleChange(-1)}
+          >
+            <i className="fas fa-minus"></i>-
+          </button>
+        </div>
       </div>
-      <button
-        className="btn btn-primary"
-        onClick={() => {
-          setCommentVisble((currState) => !currState);
-        }}
-      >
-        Show Comments
-      </button>
-      {commentvisble === true ? (
-        <>
-          <h6>Click to Hide</h6>
-          {articlesCom.map((comment) => (
-            <div key={comment.comment_id}>
-              <ul
-                style={{
-                  padding: "10px",
-                  backgroundColor: "#E5E4E2",
-                  textAlign: "left",
-                  boxShadow: "7px 2px 10px 2px #6F6F6F",
-                }}
-              >
-                <li>{comment.body}</li>
-                <li style={{ fontWeight: "bold", textAlign: "center" }}>
-                  {comment.author}
-                </li>
-              </ul>
-            </div>
-          ))}
-        </>
-      ) : null}
+      <SingleArticle articlesCom={articlesCom} />
     </>
   );
 }
