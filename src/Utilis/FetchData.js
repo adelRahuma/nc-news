@@ -10,12 +10,11 @@ export const getArticles = () => {
   });
 };
 
-<<<<<<< HEAD
 
-=======
+
 export default function getUsers() {
   return articlesAPI.get("/users").then(({ data }) => {
     return data;
   });
 }
->>>>>>> Task-8
+

@@ -5,12 +5,12 @@ import {
 } from "../Utilis/getArticleById";
 import { useParams } from "react-router";
 import { v4 as uuidv4 } from "uuid";
-<<<<<<< HEAD
+
 import { upateCommentVotes } from "../Utilis/PatchVote";
 import SingleArticle from "./SingleArticle";
-=======
+
 import { useNavigate } from 'react-router-dom';
->>>>>>> Task-8
+
 
 export default function ArticleById() {
   const [articles, setArticles] = useState([]);
