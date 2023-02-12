@@ -4,6 +4,8 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 
 function MyNavbar() {
+  const showUserName=false;
+
   return (
     <>
       <Navbar  expand="xl" bg="primary" variant="light">
@@ -19,8 +21,9 @@ function MyNavbar() {
               Comments
             </Link>
             <Link className="Link" to="/Topics">
-              Topics
+                        Topics
             </Link>
+            {(showUserName)? (<p>show</p>):null}
           </Nav>
         </Container>
       </Navbar>

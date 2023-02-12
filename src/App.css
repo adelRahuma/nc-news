@@ -47,6 +47,7 @@ p {
   overflow: auto;
 }
 .Link {
+  margin:25px 25px 25px 25px;
   float: left;
   padding: 6px;
   color: rgb(252, 251, 251);

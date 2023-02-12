@@ -6,8 +6,13 @@ const articlesAPI = axios.create({
 
 export const getArticles = () => {
   return articlesAPI.get("/articles").then(({ data }) => {
-       return data;
+    return data;
   });
 };
 
+export default function getUsers() {
+  return articlesAPI.get("/users").then(({ data }) => {
+    return data;
+  });
+}
 
