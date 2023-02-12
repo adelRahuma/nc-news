@@ -9,9 +9,17 @@ export const getArticles = () => {
     return data;
   });
 };
-
 export default function getUsers() {
   return articlesAPI.get("/users").then(({ data }) => {
     return data;
   });
+}
+
+export function getTopics() {
+  return articlesAPI
+    .get("/topics")
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => console.log(err));
 }

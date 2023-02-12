@@ -1,43 +1,41 @@
 import React, { useRef, useState, useEffect } from "react";
 import getUsers from "../Utilis/FetchData";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import postComment from "../Utilis/PostComment";
 import { logDOM } from "@testing-library/react";
 
 export default function Comments() {
- 
+  let [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
- 
+  let show = false;
   const { articles } = location.state;
-    
+  const [message, setMessage] = useState("");
   const [user, setUser] = useState([]);
   const inputRef = useRef();
-
   useEffect(() => {
-    
-    getUsers()
-      .then((data) => {
-        for (let i in data) {
-          if (data[i].username === articles[0].author) 
-          setUser(data[i]);
-        }
-      })
-      .catch((err) => alert(err));
+    getUsers().then((data) => {
+      for (let i in data) {
+        if (data[i].username === articles[0].author) setUser(data[i]);
+      }
+    });
   }, []);
 
-  function handleSubmit(e) { 
-   
-    alert(inputRef.current.value);
-    postComment(
-      inputRef.current.value,
-      articles[0].author,
-      articles[0].article_id
-    ).catch((err) => console.log(err));
- e.preventDefault();
-   
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (inputRef.current.value.length >= 3) {
+      postComment(
+        inputRef.current.value,
+        articles[0].author,
+        articles[0].article_id
+      ).then(() => {
+        setMessage("Your Comment has been added");
+        show = true;
+      });
+    }
   }
   return (
     <>
+      <h4 aria-label="Page comments header">{!show ? message : null}</h4>
       <div className="container">
         <div className="row" style={{ padding: "5px" }}>
           <h6>Add Comment</h6>
@@ -45,7 +43,10 @@ export default function Comments() {
         </div>
         <div className="row">
           <div className="col-2">
-            <img
+            <p style={{ display: "none" }}>
+              {(document.getElementById("img").src = user.avatar_url)}
+            </p>
+            {/* <img
               className="rounded-circle"
               src={user.avatar_url}
               style={{
@@ -57,12 +58,13 @@ export default function Comments() {
                 boxShadow: "7px 2px 10px 2px #6F6F6F",
               }}
               alt={user.name}
-            />
+            /> */}
           </div>
           <div className="col-8">
             <form>
               <div className="form-outline mb-2">
                 <input
+                  aria-label="TextB by article title"
                   style={{
                     fontSize: "12px",
                     fontWeight: "bold",
@@ -79,6 +81,7 @@ export default function Comments() {
 
               <div className="form-outline mb-4">
                 <textarea
+                  aria-label="Add your comment in this text holder"
                   className="form-control"
                   id="msg"
                   rows="6"
@@ -86,7 +89,7 @@ export default function Comments() {
                 ></textarea>
                 <br />
                 <button
-                 
+                  aria-label="Button to post comment"
                   className="btn btn-primary btn-block mb-2"
                   onClick={handleSubmit}
                 >
@@ -95,35 +98,6 @@ export default function Comments() {
               </div>
             </form>
           </div>
-          {/* <div
-          className="col-4"
-          style={{ display: "absolute", textAlign: "center" }}
-        >
-          <div className="d-flex mb-4" style={{ maxWidth: "40%" }}>
-            <button type="button" className="btn btn-danger px-3 me-2">
-              <i className="fas fa-minus"></i>-
-            </button>
-
-            <div className="form-outline">
-              <input
-                id="form1"
-                readOnly
-                min="0"
-                name="quantity"
-                value="1"
-                type="number"
-                className="form-control"
-              />
-              <label className="form-label" htmlFor="form1">
-                Quantity
-              </label>
-            </div>
-
-            <button type="button" className="btn btn-success px-3 ms-2">
-              <i className="fas fa-plus"></i>+
-            </button>
-          </div>
-        </div> */}
         </div>
       </div>
     </>
