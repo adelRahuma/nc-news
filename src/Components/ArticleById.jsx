@@ -4,10 +4,13 @@ import {
   getArticlesWithComments,
 } from "../Utilis/getArticleById";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+<<<<<<< HEAD
 import { upateCommentVotes } from "../Utilis/PatchVote";
 import SingleArticle from "./SingleArticle";
+=======
+import { useNavigate } from 'react-router-dom';
+>>>>>>> Task-8
 
 export default function ArticleById() {
   const [articles, setArticles] = useState([]);
@@ -15,6 +18,7 @@ export default function ArticleById() {
   const [loading, setLoading] = useState(false);
   const [votesNo, setVotesNo] = useState(0);
   const { article_id } = useParams();
+  const navigate = useNavigate();
   useEffect(() => {
     Promise.all([
       getArticleById(article_id),
@@ -23,6 +27,7 @@ export default function ArticleById() {
       setArticles(getArticleById);
       setArticlesCom(getArticlesWithComments);
       setLoading(true);
+      localStorage.setItem('articlesCom',JSON.stringify(articlesCom))
     });
   }, [article_id, articlesCom, votesNo]);
 
@@ -62,6 +67,7 @@ export default function ArticleById() {
             }}
           >
             <p>{articles[0].body}</p>
+            <button className="btn btn-outline-primary" onClick={(e)=>{navigate('/Comments',{state:{articles}})} }>Comment</button>
           </div>
 
           <div className="col-6">
