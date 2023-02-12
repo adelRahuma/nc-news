@@ -20,4 +20,8 @@ export const getArticlesWithComments = (article_id) => {
     });
 };
 
-
+export const getArticlesCat = (topic) => {
+  return articlesAPI.get(`/articles?topic=${topic}`).then(({ data }) => {
+    return data;
+  });
+};
