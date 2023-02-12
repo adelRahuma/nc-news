@@ -73,3 +73,6 @@ Link.active {
   padding: 20px;
   box-shadow: 7px 2px 10px 2px #fcf9f9;
 }
+li:hover{
+  background-color:rgb(213, 218, 218);
+}
