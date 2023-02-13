@@ -5,16 +5,14 @@ import {
 } from "../Utilis/getArticleById";
 import { useParams } from "react-router";
 import { v4 as uuidv4 } from "uuid";
-
+import "react-bootstrap";
 
 import { upateCommentVotes } from "../Utilis/PatchVote";
 import SingleArticle from "./SingleArticle";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from "react-router-dom";
 
-import { useNavigate } from "react-router-dom";
-
-
+//import { useNavigate } from "react-router-dom";
 
 export default function ArticleById() {
   const [articles, setArticles] = useState([]);
@@ -53,7 +51,6 @@ export default function ArticleById() {
         </div>
 
         <div
-          key={uuidv4()}
           className="row"
           style={{
             padding: "10px",
@@ -73,7 +70,6 @@ export default function ArticleById() {
           >
             <p aria-label="Paragraph body">{articles[0].body}</p>
             <button
-              aria-label="Press Button to comment"
               className="btn btn-outline-primary"
               onClick={(e) => {
                 navigate("/Comments", { state: { articles } });
@@ -127,7 +123,7 @@ export default function ArticleById() {
 
       <SingleArticle articlesCom={articlesCom} />
 
-      <button
+      {/* <button
         aria-label="Button show comments"
         className="btn btn-primary"
         onClick={() => {
@@ -158,8 +154,7 @@ export default function ArticleById() {
             </div>
           ))}
         </>
-      ) : null}
-
+      ) : null} */}
     </>
   );
 }

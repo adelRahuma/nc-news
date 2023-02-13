@@ -46,19 +46,6 @@ export default function Comments() {
             <p style={{ display: "none" }}>
               {(document.getElementById("img").src = user.avatar_url)}
             </p>
-            {/* <img
-              className="rounded-circle"
-              src={user.avatar_url}
-              style={{
-                height: "60px",
-                width: "60px",
-                objectFit: "fill",
-                padding: "20px",
-                maxWidth: "300px",
-                boxShadow: "7px 2px 10px 2px #6F6F6F",
-              }}
-              alt={user.name}
-            /> */}
           </div>
           <div className="col-8">
             <form>
